@@ -1,0 +1,1878 @@
+//Entity:
+package com.schoolmanagement.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Courses {
+@Id
+private int CourseID;
+private String Name;
+private String Description;
+private int SchoolYear;
+
+@OneToMany(mappedBy="courses",cascade=CascadeType.ALL)
+List<Schedules> Scheduleslist1=new ArrayList<Schedules>();
+@OneToMany(mappedBy="course",cascade=CascadeType.ALL)
+List<Subjects> Subjectslist=new ArrayList<Subjects>();
+public Courses() {
+	super();
+	
+}
+public int getCourseID() {
+	return CourseID;
+}
+public void setCourseID(int courseID) {
+	CourseID = courseID;
+}
+public String getName() {
+	return Name;
+}
+public void setName(String name) {
+	Name = name;
+}
+public String getDescription() {
+	return Description;
+}
+public void setDescription(String description) {
+	Description = description;
+}
+public int getSchoolYear() {
+	return SchoolYear;
+}
+public void setSchoolYear(int schoolYear) {
+	SchoolYear = schoolYear;
+}
+public List<Schedules> getScheduleslist1() {
+	return Scheduleslist1;
+}
+public void setScheduleslist1(List<Schedules> scheduleslist1) {
+	Scheduleslist1 = scheduleslist1;
+}
+public List<Subjects> getSubjectslist() {
+	return Subjectslist;
+}
+public void setSubjectslist(List<Subjects> subjectslist) {
+	Subjectslist = subjectslist;
+}
+@Override
+public String toString() {
+	return "Courses [CourseID=" + CourseID + ", Name=" + Name + ", Description=" + Description + ", SchoolYear="
+			+ SchoolYear + "]";
+}
+}
+package com.schoolmanagement.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Instructor {
+@Id
+private int InstructorID;
+private String FirstName;
+private String LastName;
+private String Gender;
+private int Age;
+private Long ContactAddress;
+private String Email;
+private String Password;
+
+@OneToMany(mappedBy="instrctors",cascade=CascadeType.ALL)
+List<Schedules> Scheduleslist=new ArrayList<Schedules>();
+
+public Instructor() {
+	super();
+	
+}
+
+public int getInstructorID() {
+	return InstructorID;
+}
+
+public void setInstructorID(int instructorID) {
+	InstructorID = instructorID;
+}
+
+public String getFirstName() {
+	return FirstName;
+}
+
+public void setFirstName(String firstName) {
+	FirstName = firstName;
+}
+
+public String getLastName() {
+	return LastName;
+}
+
+public void setLastName(String lastName) {
+	LastName = lastName;
+}
+
+
+public int getAge() {
+	return Age;
+}
+
+public void setAge(int age) {
+	Age = age;
+}
+
+
+
+public String getGender() {
+	return Gender;
+}
+
+public void setGender(String gender) {
+	Gender = gender;
+}
+
+public Long getContactAddress() {
+	return ContactAddress;
+}
+
+public void setContactAddress(Long contactAddress) {
+	ContactAddress = contactAddress;
+}
+
+public String getEmail() {
+	return Email;
+}
+
+public void setEmail(String email) {
+	Email = email;
+}
+
+public String getPassword() {
+	return Password;
+}
+
+public void setPassword(String password) {
+	Password = password;
+}
+
+public List<Schedules> getScheduleslist() {
+	return Scheduleslist;
+}
+
+public void setScheduleslist(List<Schedules> scheduleslist) {
+	Scheduleslist = scheduleslist;
+}
+
+@Override
+public String toString() {
+	return "Instructor [InstructorID=" + InstructorID + ", FirstName=" + FirstName + ", LastName=" + LastName
+			+ ", Gender=" + Gender + ", Age=" + Age + ", ContactAddress=" + ContactAddress + ", Email=" + Email
+			+ ", Password=" + Password + "]";
+}
+}
+
+package com.schoolmanagement.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Schedules {
+@Id	
+private int ScheduleID;
+private String Dayofschedule;
+private String StartingTime;
+private String TimeEnded;
+
+@ManyToOne
+@JoinColumn(name="CourseID")
+private Courses courses ;
+
+@ManyToOne
+@JoinColumn(name="SubjectID")
+private Subjects subjects;
+
+@ManyToOne
+@JoinColumn(name="StudentID")
+private Student student;
+
+@ManyToOne
+@JoinColumn(name="InstructorID")
+private Instructor instrctors;
+
+public Schedules() {
+	super();
+	
+}
+
+public int getScheduleID() {
+	return ScheduleID;
+}
+
+public void setScheduleID(int scheduleID) {
+	ScheduleID = scheduleID;
+}
+
+
+public String getDayofschedule() {
+	return Dayofschedule;
+}
+
+public void setDayofschedule(String dayofschedule) {
+	Dayofschedule = dayofschedule;
+}
+
+public String getStartingTime() {
+	return StartingTime;
+}
+
+public void setStartingTime(String startingTime) {
+	StartingTime = startingTime;
+}
+
+public String getTimeEnded() {
+	return TimeEnded;
+}
+
+public void setTimeEnded(String timeEnded) {
+	TimeEnded = timeEnded;
+}
+
+public Courses getCourses() {
+	return courses;
+}
+
+public void setCourses(Courses courses) {
+	this.courses = courses;
+}
+
+public Subjects getSubjects() {
+	return subjects;
+}
+
+public void setSubjects(Subjects subjects) {
+	this.subjects = subjects;
+}
+
+public Student getStudent() {
+	return student;
+}
+
+public void setStudent(Student student) {
+	this.student = student;
+}
+
+public Instructor getInstrctors() {
+	return instrctors;
+}
+
+public void setInstrctors(Instructor instrctors) {
+	this.instrctors = instrctors;
+}
+
+@Override
+public String toString() {
+	return "Schedules [ScheduleID=" + ScheduleID + ", Dayofschedule=" + Dayofschedule + ", StartingTime=" + StartingTime
+			+ ", TimeEnded=" + TimeEnded + "]";
+}
+
+public void setInstructor(Instructor ins) {
+	// TODO Auto-generated method stub
+	
+}
+
+}
+
+package com.schoolmanagement.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Student {
+@Id	
+private int StudentID;
+private String FirstName;
+private String LastName;
+private String Gender;
+private int Age;
+private Long ContactAddress;
+private String Email;
+private String Password;
+
+@OneToMany(mappedBy="student",cascade=CascadeType.ALL)
+List<Schedules> Scheduleslist=new ArrayList<Schedules>();
+@OneToMany(mappedBy="std",cascade=CascadeType.ALL)
+List<Transaction1> Transactionlist=new ArrayList<Transaction1>();
+public Student() {
+	super();
+	
+}
+public int getStudentID() {
+	return StudentID;
+}
+public void setStudentID(int studentID) {
+	StudentID = studentID;
+}
+public String getFirstName() {
+	return FirstName;
+}
+public void setFirstName(String firstName) {
+	FirstName = firstName;
+}
+public String getLastName() {
+	return LastName;
+}
+public void setLastName(String lastName) {
+	LastName = lastName;
+}
+public String getGender() {
+	return Gender;
+}
+public void setGender(String gender) {
+	Gender = gender;
+}
+public int getAge() {
+	return Age;
+}
+public void setAge(int age) {
+	Age = age;
+}
+
+
+public Long getContactAddress() {
+	return ContactAddress;
+}
+public void setContactAddress(Long contactAddress) {
+	ContactAddress = contactAddress;
+}
+public String getEmail() {
+	return Email;
+}
+public void setEmail(String email) {
+	Email = email;
+}
+public String getPassword() {
+	return Password;
+}
+public void setPassword(String password) {
+	Password = password;
+}
+public List<Schedules> getScheduleslist() {
+	return Scheduleslist;
+}
+public void setScheduleslist(List<Schedules> scheduleslist) {
+	Scheduleslist = scheduleslist;
+}
+
+public List<Transaction1> getTransactionlist() {
+	return Transactionlist;
+}
+public void setTransactionlist(List<Transaction1> transactionlist) {
+	Transactionlist = transactionlist;
+}
+@Override
+public String toString() {
+	return "Student [StudentID=" + StudentID + ", FirstName=" + FirstName + ", LastName=" + LastName + ", Gender="
+			+ Gender + ", Age=" + Age + ", ContactAddress=" + ContactAddress + ", Email=" + Email + ", Password="
+			+ Password + "]";
+}
+public void updateStudent(Student s1) {
+	// TODO Auto-generated method stub
+	
+}
+}
+package com.schoolmanagement.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Subjects {
+@Id
+private int SubjectID;
+private String Name;
+
+
+@OneToMany(mappedBy="subjects",cascade=CascadeType.ALL)
+List<Schedules> Scheduleslist=new ArrayList<Schedules>();
+
+@ManyToOne
+@JoinColumn(name="CourseID")
+private Courses course;
+
+public Subjects() {
+	super();
+	
+}
+
+public int getSubjectID() {
+	return SubjectID;
+}
+
+public void setSubjectID(int subjectID) {
+	SubjectID = subjectID;
+}
+
+public String getName() {
+	return Name;
+}
+
+public void setName(String name) {
+	Name = name;
+}
+
+
+public List<Schedules> getScheduleslist() {
+	return Scheduleslist;
+}
+
+public void setScheduleslist(List<Schedules> scheduleslist) {
+	Scheduleslist = scheduleslist;
+}
+
+public Courses getCourse() {
+	return course;
+}
+
+public void setCourse(Courses course) {
+	this.course = course;
+}
+
+@Override
+public String toString() {
+	return "Subjects [SubjectID=" + SubjectID + ", Name=" + Name + "]";
+}
+
+public void deleteSubjects(Subjects s2) {
+	// TODO Auto-generated method stub
+	
+}
+}
+package com.schoolmanagement.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Transaction1 {
+@Id
+private int TransactionID;
+private int TransactionAmount;
+
+
+@ManyToOne
+@JoinColumn(name="StudentID")
+private Student std;
+
+
+public Transaction1() {
+	super();
+
+}
+
+
+public int getTransactionID() {
+	return TransactionID;
+}
+
+
+public void setTransactionID(int transactionID) {
+	TransactionID = transactionID;
+}
+
+
+public int getTransactionAmount() {
+	return TransactionAmount;
+}
+
+
+public void setTransactionAmount(int transactionAmount) {
+	TransactionAmount = transactionAmount;
+}
+
+
+
+public Student getStd() {
+	return std;
+}
+
+
+public void setStd(Student std) {
+	this.std = std;
+}
+
+
+@Override
+public String toString() {
+	return "Transaction [TransactionID=" + TransactionID + ", TransactionAmount=" + TransactionAmount + ", StudentID="
+			+  "]";
+}
+}
+//Services:
+package com.schoolmanagement.services;
+
+import com.schoolmanagement.entity.Courses;
+
+public interface CoursesService {
+
+		public void insertCourses(Courses C);
+		public void updateCourses(Courses C);
+		public void deleteCourses(Courses C);
+		public int displayCourses();
+		public void getCoursesbyId(Integer id);
+}
+package com.schoolmanagement.services;
+
+import com.schoolmanagement.entity.Instructor;
+
+public interface InstructorService {
+
+		public void insertInstructor(Instructor I);
+		public void updateInstructor(Instructor I);
+		public void deleteInstructor(Instructor I);
+		public int displayInstructor();
+		public void getInstructorbyId(Integer id);
+}
+package com.schoolmanagement.services;
+
+import com.schoolmanagement.entity.Schedules;
+
+public interface SchedulesService {
+
+		public void insertSchedules(Schedules S);
+		public void updateSchedules(Schedules S);
+		public void deleteSchedules(Schedules S);
+		public int displaySchedules();
+		public void getSchedulesbyId(Integer id);
+		void displayScheudules(Schedules S);
+		
+}
+package com.schoolmanagement.services;
+
+import com.schoolmanagement.entity.Student;
+
+public interface StudentService {
+
+		public void insertStudent(Student S1);
+		public void updateStudent(Student S1);
+		public void deleteStudent(Student S1);
+		public int displayStudent();
+		public void getStudentbyId(Integer id);
+		
+}
+package com.schoolmanagement.services;
+
+import com.schoolmanagement.entity.Subjects;
+
+public interface SubjectsService {
+
+		public void insertSubjects(Subjects S2);
+		public void updateSubjects(Subjects S2);
+		public void deleteSubjects(Subjects S2);
+		public int displaySubjects();
+		public void getSubjectsbyId(Integer id);
+}
+package com.schoolmanagement.services;
+
+import com.schoolmanagement.entity.Transaction1;
+
+public interface Transaction1Service {
+
+		public void insertTransaction1(Transaction1 T);
+		public void updateTransaction1(Transaction1 T);
+		public void deleteTransaction1(Transaction1 T);
+		public int displayTransaction1();
+		public void getTransaction1byId(Integer id);
+		
+
+
+}
+//ServiceImpl:
+package com.schoolmanagement.serviceImpl;
+
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import com.schoolmanagement.entity.Courses;
+import com.schoolmanagement.services.CoursesService;
+import com.schoolmanagement.utility.UtilityConfig;
+
+public class CoursesServiceImpl implements CoursesService{
+
+	SessionFactory sfactory=UtilityConfig.getSession();
+	Session session;
+	Transaction transaction;
+	@Override
+	public void insertCourses(Courses C) {
+		try {
+			session=sfactory.openSession();
+		    transaction=session.beginTransaction();
+			session.save(C);
+			transaction.commit();
+			System.out.println("inserted Courses details");
+			}
+			finally {
+			session.close();
+			
+			}
+ }
+
+	@Override
+	public void updateCourses(Courses C) {
+		try {
+			session=sfactory.openSession();
+		    transaction=session.beginTransaction();
+			session.saveOrUpdate(C);
+			transaction.commit();
+			System.out.println("updated courses details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+		
+	}
+
+	@Override
+	public void deleteCourses(Courses C) {
+		try {
+			session=sfactory.openSession();
+			transaction=session.beginTransaction();
+			session.delete(C);
+			transaction.commit();
+			System.out.println("deleted courses details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public int displayCourses() {
+		try {
+			session=sfactory.openSession();
+			TypedQuery tq=session.createQuery("from Courses");
+			List<Courses> list=tq.getResultList();
+			Iterator<Courses> itr=list.iterator();
+			while(itr.hasNext())
+			{
+				System.out.println(itr.next());
+			}
+			}
+			finally
+			{
+				session.close();
+			}
+		return 1;
+	}
+
+	@Override
+	public void getCoursesbyId(Integer id) {
+		try {
+			session=sfactory.openSession();
+			Courses c=session.get(Courses.class, id);
+			System.out.println(c);
+		}
+		finally {
+			session.close();
+		}	
+		
+	
+		
+	}
+
+}
+package com.schoolmanagement.serviceImpl;
+
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import com.schoolmanagement.entity.Instructor;
+import com.schoolmanagement.services.InstructorService;
+import com.schoolmanagement.utility.UtilityConfig;
+
+public class InstructorServiceImpl implements InstructorService{
+
+	SessionFactory sfactory=UtilityConfig.getSession();
+	Session session;
+	Transaction transaction;
+	@Override
+	public void insertInstructor(Instructor I) {
+		try {
+			session=sfactory.openSession();
+		    transaction=session.beginTransaction();
+			session.save(I);
+			transaction.commit();
+			System.out.println("inserted Instructor details");
+			}
+			finally {
+			session.close();
+			
+			}
+ }
+
+	@Override
+	public void updateInstructor(Instructor I) {
+		try {
+			session=sfactory.openSession();
+		    transaction=session.beginTransaction();
+			session.saveOrUpdate(I);
+			transaction.commit();
+			System.out.println("updated instructor details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+		
+	}
+
+	@Override
+	public void deleteInstructor(Instructor I) {
+		try {
+			session=sfactory.openSession();
+			transaction=session.beginTransaction();
+			session.delete(I);
+			transaction.commit();
+			System.out.println("deleted instructor details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public int displayInstructor() {
+		try {
+			session=sfactory.openSession();
+			TypedQuery tq=session.createQuery("from Instructor");
+			List<Instructor> list=tq.getResultList();
+			Iterator<Instructor> itr=list.iterator();
+			while(itr.hasNext())
+			{
+				System.out.println(itr.next());
+			}
+			}
+			finally
+			{
+				session.close();
+			}
+		return 1;
+	}
+
+	@Override
+	public void getInstructorbyId(Integer id) {
+		try {
+			session=sfactory.openSession();
+			Instructor i=session.get(Instructor.class, id);
+			System.out.println(i);
+		}
+		finally {
+			session.close();
+		}	
+		
+	
+		
+	}
+
+}
+package com.schoolmanagement.serviceImpl;
+
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import com.schoolmanagement.entity.Schedules;
+import com.schoolmanagement.services.SchedulesService;
+import com.schoolmanagement.utility.UtilityConfig;
+
+public class SchedulesServiceImpl implements SchedulesService{
+
+	SessionFactory sfactory=UtilityConfig.getSession();
+	Session session;
+	Transaction transaction;
+	@Override
+	public void insertSchedules(Schedules S) {
+		try {
+			session=sfactory.openSession();
+		    transaction=session.beginTransaction();
+			session.save(S);
+			transaction.commit();
+			System.out.println("inserted Schedules details");
+			}
+			finally {
+			session.close();
+			
+			}
+ }
+
+	@Override
+	public void updateSchedules(Schedules S) {
+		try {
+			session=sfactory.openSession();
+		    transaction=session.beginTransaction();
+			session.saveOrUpdate(S);
+			transaction.commit();
+			System.out.println("updated schedules details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+		
+	}
+
+	@Override
+	public void deleteSchedules(Schedules S) {
+		try {
+			session=sfactory.openSession();
+			transaction=session.beginTransaction();
+			session.delete(S);
+			transaction.commit();
+			System.out.println("deleted schedules details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public int displaySchedules() {
+		try {
+			session=sfactory.openSession();
+			TypedQuery tq=session.createQuery("from Schedules");
+			List<Schedules> list=tq.getResultList();
+			Iterator<Schedules> itr=list.iterator();
+			while(itr.hasNext())
+			{
+				System.out.println(itr.next());
+			}
+			}
+			finally
+			{
+				session.close();
+			}
+		return 1;
+	}
+
+	@Override
+	public void getSchedulesbyId(Integer id) {
+		try {
+			session=sfactory.openSession();
+			Schedules s=session.get(Schedules.class, id);
+			System.out.println(s);
+		}
+		finally {
+			session.close();
+		}	
+		
+	
+		
+	}
+
+	@Override
+	public void displayScheudules(Schedules S) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
+package com.schoolmanagement.serviceImpl;
+
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import com.schoolmanagement.entity.Student;
+import com.schoolmanagement.services.StudentService;
+import com.schoolmanagement.utility.UtilityConfig;
+
+public class StudentServiceImpl implements StudentService{
+
+	SessionFactory sfactory=UtilityConfig.getSession();
+	Session session;
+	Transaction transaction;
+	@Override
+	public void insertStudent(Student S1) {
+		try {
+			session=sfactory.openSession();
+		    transaction=session.beginTransaction();
+			session.save(S1);
+			transaction.commit();
+			System.out.println("inserted Student details");
+			}
+			finally {
+			session.close();
+			
+			}
+ }
+
+	@Override
+	public void updateStudent(Student S1) {
+		try {
+			session=sfactory.openSession();
+		    transaction=session.beginTransaction();
+			session.saveOrUpdate(S1);
+			transaction.commit();
+			System.out.println("updated student details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+		
+	}
+
+	@Override
+	public void deleteStudent(Student S1) {
+		try {
+			session=sfactory.openSession();
+			transaction=session.beginTransaction();
+			session.delete(S1);
+			transaction.commit();
+			System.out.println("deleted student details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public int displayStudent() {
+		try {
+			session=sfactory.openSession();
+			TypedQuery tq=session.createQuery("from Student");
+			List<Student> list=tq.getResultList();
+			Iterator<Student> itr=list.iterator();
+			while(itr.hasNext())
+			{
+				System.out.println(itr.next());
+			}
+			}
+			finally
+			{
+				session.close();
+			}
+		return 1;
+	}
+
+	@Override
+	public void getStudentbyId(Integer id) {
+		try {
+			session=sfactory.openSession();
+			Student s1=session.get(Student.class, id);
+			System.out.println(s1);
+		}
+		finally {
+			session.close();
+		}	
+		
+	
+		
+	}
+
+}
+package com.schoolmanagement.serviceImpl;
+
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import com.schoolmanagement.entity.Subjects;
+import com.schoolmanagement.services.SubjectsService;
+import com.schoolmanagement.utility.UtilityConfig;
+
+public class SubjectsServiceImpl implements SubjectsService{
+
+	SessionFactory sfactory=UtilityConfig.getSession();
+	Session session;
+	Transaction transaction;
+	@Override
+	public void insertSubjects(Subjects S2) {
+		try {
+			session=sfactory.openSession();
+		    transaction=session.beginTransaction();
+			session.save(S2);
+			transaction.commit();
+			System.out.println("inserted Subjects details");
+			}
+			finally {
+			session.close();
+			
+			}
+ }
+
+	@Override
+	public void updateSubjects(Subjects S2) {
+		try {
+			session=sfactory.openSession();
+		    transaction=session.beginTransaction();
+			session.saveOrUpdate(S2);
+			transaction.commit();
+			System.out.println("updated subjects details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+		
+	}
+
+	@Override
+	public void deleteSubjects(Subjects S2) {
+		try {
+			session=sfactory.openSession();
+			transaction=session.beginTransaction();
+			session.delete(S2);
+			transaction.commit();
+			System.out.println("deleted subjects details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public int displaySubjects() {
+		try {
+			session=sfactory.openSession();
+			TypedQuery tq=session.createQuery("from Subjects");
+			List<Subjects> list=tq.getResultList();
+			Iterator<Subjects> itr=list.iterator();
+			while(itr.hasNext())
+			{
+				System.out.println(itr.next());
+			}
+			}
+			finally
+			{
+				session.close();
+			}
+		return 1;
+	}
+
+	@Override
+	public void getSubjectsbyId(Integer id) {
+		try {
+			session=sfactory.openSession();
+			Subjects s2=session.get(Subjects.class, id);
+			System.out.println(s2);
+		}
+		finally {
+			session.close();
+		}	
+		
+	
+		
+	}
+
+}
+package com.schoolmanagement.serviceImpl;
+
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import com.schoolmanagement.entity.Transaction1;
+import com.schoolmanagement.entity.Transaction1;
+import com.schoolmanagement.services.Transaction1Service;
+import com.schoolmanagement.utility.UtilityConfig;
+
+public class Transaction1ServiceImpl implements Transaction1Service{
+
+	SessionFactory sfactory=UtilityConfig.getSession();
+	Session session;
+	Transaction transaction;
+	@Override
+	public void insertTransaction1(Transaction1 T) {
+		try {
+			session=sfactory.openSession();
+		    transaction=session.beginTransaction();
+			session.save(T);
+			transaction.commit();
+			System.out.println("inserted Transaction1 details");
+			}
+			finally {
+			session.close();
+			
+			}
+ }
+
+	@Override
+	public void updateTransaction1(Transaction1 T) {
+		try {
+			session=sfactory.openSession();
+		    transaction=session.beginTransaction();
+			session.saveOrUpdate(T);
+			transaction.commit();
+			System.out.println("updated transaction details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+		
+	}
+
+	@Override
+	public void deleteTransaction1(Transaction1 T) {
+		try {
+			session=sfactory.openSession();
+			transaction=session.beginTransaction();
+			session.delete(T);
+			transaction.commit();
+			System.out.println("deleted transaction1 details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public int displayTransaction1() {
+		try {
+			session=sfactory.openSession();
+			TypedQuery tq=session.createQuery("from Transaction1");
+			List<Transaction1> list=tq.getResultList();
+			Iterator<Transaction1> itr=list.iterator();
+			while(itr.hasNext())
+			{
+				System.out.println(itr.next());
+			}
+			}
+			finally
+			{
+				session.close();
+			}
+		return 1;
+	}
+
+	@Override
+	public void getTransaction1byId(Integer id) {
+		try {
+			session=sfactory.openSession();
+			Transaction1 t=session.get(Transaction1.class, id);
+			System.out.println(t);
+		}
+		finally {
+			session.close();
+		}	
+		
+	
+		
+	}
+
+}
+//UtilityConfig:
+package com.schoolmanagement.utility;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.*;
+public class UtilityConfig {
+	
+
+		public static SessionFactory getSession() {
+			
+		StandardServiceRegistry sregistry=new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		Metadata metadata=new MetadataSources(sregistry).getMetadataBuilder().build();
+		
+		SessionFactory sfactory=metadata.buildSessionFactory();
+		return sfactory;
+		
+	}
+
+}
+//hibernate.cfg.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-configuration>
+  <session-factory>
+    <!-- Database connection settings -->
+    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/schoolmanagementsystem</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">Niharika@123</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+
+    <!-- JDBC connection pool settings -->
+    <property name="hibernate.c3p0.min_size">5</property>
+    <property name="hibernate.c3p0.max_size">20</property>
+
+    <!-- Other Hibernate properties -->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.show_sql">true</property>
+    
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <mapping class="com.schoolmanagement.entity.Courses"/>
+    <mapping class="com.schoolmanagement.entity.Instructor"/>
+    <mapping class="com.schoolmanagement.entity.Schedules"/>
+    <mapping class="com.schoolmanagement.entity.Student"/>
+    <mapping class="com.schoolmanagement.entity.Subjects"/>
+    <mapping class="com.schoolmanagement.entity.Transaction1"/>
+
+  //ProjectImplementation:
+package com.schoolmanagementsystem;
+import java.util.Scanner;
+
+import com.schoolmanagement.entity.Courses;
+import com.schoolmanagement.entity.Instructor;
+import com.schoolmanagement.entity.Schedules;
+import com.schoolmanagement.entity.Student;
+import com.schoolmanagement.entity.Subjects;
+import com.schoolmanagement.entity.Transaction1;
+import com.schoolmanagement.serviceImpl.CoursesServiceImpl;
+import com.schoolmanagement.serviceImpl.InstructorServiceImpl;
+import com.schoolmanagement.serviceImpl.SchedulesServiceImpl;
+import com.schoolmanagement.serviceImpl.StudentServiceImpl;
+import com.schoolmanagement.serviceImpl.SubjectsServiceImpl;
+import com.schoolmanagement.serviceImpl.Transaction1ServiceImpl;
+
+public class ProjectImplementation 
+{
+	public static void main(String args[])
+	{
+		System.out.println("Welcome to the School management system");
+		Scanner sc=new Scanner(System.in);
+		System.out.println("You are 1.User 2.Admin \nEnter Choice");
+		int user = sc.nextInt();
+		
+		CoursesServiceImpl cs = new CoursesServiceImpl();
+		InstructorServiceImpl is=new InstructorServiceImpl();
+		SchedulesServiceImpl ss=new SchedulesServiceImpl();
+		StudentServiceImpl ss1=new StudentServiceImpl();
+		SubjectsServiceImpl ss2=new SubjectsServiceImpl();
+		Transaction1ServiceImpl ts=new Transaction1ServiceImpl();
+		
+		if (user == 1) 
+		{
+	     System.out.println("1.get courses details");
+	     System.out.println("2.get instructor details");
+	     System.out.println("3.get schedules details");
+	     System.out.println("4.get student details");
+	     System.out.println("5.get subjects details");
+	     System.out.println("6.get transaction1 details");
+	     System.out.println("\nenter choice:");
+	     int a = sc.nextInt();
+	     while (a > 0) 
+	    	 
+	     {
+			switch (a)
+			{
+            case 1: 
+                 Integer cd;
+       	      System.out.println("enter courses id:");
+       	      cd=sc.nextInt();
+                 cs.getCoursesbyId(cd);
+                 break;
+            case 2:
+           	    Integer id;
+                System.out.println("enter instructor id:");
+                id=sc.nextInt();
+                is.getInstructorbyId(id);
+                break;
+			case 3:
+				 Integer sid;
+			     System.out.println("enter schedules id:");
+			     sid=sc.nextInt();
+			     ss.getSchedulesbyId(sid);
+			     break;
+			case 4:
+				 Integer s1id;
+		    	 System.out.println("enter student id:");
+		         s1id=sc.nextInt();
+		         ss1.getStudentbyId(s1id);
+		         
+			case 5:
+				 Integer s2id;
+		    	 System.out.println("enter subjects id:");
+		         s2id=sc.nextInt();
+		         ss2.getSubjectsbyId(s2id);
+		    	 break;	 
+			case 6:
+				 Integer tid;
+		    	 System.out.println("enter transaction1 id:");
+		         tid=sc.nextInt();
+		         ts.getTransaction1byId(tid);
+		         break;
+						
+			default:System.out.println("invalid option");
+            break;
+			}
+     
+		System.out.println("1.get courses details");
+	    System.out.println("2.get instructor details");
+	    System.out.println("3.get schedules details");
+	    System.out.println("4.get student details");
+	    System.out.println("5.get subjects details");
+	    System.out.println("6.get transaction1 details \nPress 0 to exit");
+	    a = sc.nextInt();
+        }
+	 }
+		else if(user==2)
+		{
+			System.out.println("1.get courses details");
+		    System.out.println("2.get instructor details");
+		    System.out.println("3.get schedules details");
+		    System.out.println("4.get student details");
+		    System.out.println("5.get subjects details");
+		    System.out.println("6.get transaction1 details");
+		    System.out.println("7.insert courses details");
+		    System.out.println("8.insert instructor details");
+		    System.out.println("9.insert schedules details");
+		    System.out.println("10.insert student details");
+		    System.out.println("11.insert subjects details");
+		    System.out.println("12.insert transaction1 details");
+		    System.out.println("13.update courses details");
+		    System.out.println("14.update instructor details");
+		    System.out.println("15.update schedules details");
+		    System.out.println("16.update student details");
+		    System.out.println("17.update subjects details");
+		    System.out.println("18.update transaction1 details");
+		    System.out.println("19.delete courses details");
+		    System.out.println("20.delete instructor details");
+		    System.out.println("21.delete schedules details");
+		    System.out.println("22.delete student details");
+		    System.out.println("23.delete subjects details");
+		    System.out.println("24.delete transaction1 details");
+		    System.out.println("25.display courses details");
+		    System.out.println("26.display instructor details");
+		    System.out.println("27.display schedules details");
+		    System.out.println("28.display student details");
+		    System.out.println("29.display subjects details");
+		    System.out.println("30.display transaction1 details");
+		    System.out.println("Enter Choice");
+		    int a = sc.nextInt();
+		    while(a>0)
+		    {
+		      switch(a)
+		      {
+		      case 1: 
+	                 Integer cid;
+	       	      System.out.println("enter courses id:");
+	       	     cid=sc.nextInt();
+	                 cs.getCoursesbyId(cid);
+	                 break;
+	            case 2:
+	           	    Integer id;
+	                System.out.println("enter instructor id:");
+	                id=sc.nextInt();
+	                is.getInstructorbyId(id);
+	                break;
+	            case 3:
+					 Integer sid;
+				     System.out.println("enter schedules id:");
+				     sid=sc.nextInt();
+				     ss.getSchedulesbyId(sid);
+				     break;
+				case 4:
+					 Integer s1id;
+			    	 System.out.println("enter student id:");
+			         s1id=sc.nextInt();
+			         ss1.getStudentbyId(s1id);
+			    	 break;
+				case 5:
+					 Integer s2id;
+			    	 System.out.println("enter subjects id:");
+			         s2id=sc.nextInt();
+			         ss2.getSubjectsbyId(s2id);
+			    	 break;	 
+				case 6:
+					 Integer tid;
+			    	 System.out.println("enter transaction1 id:");
+			         tid=sc.nextInt();
+			         ts.getTransaction1byId(tid);
+			         break;
+				case 7:
+					Courses c=new Courses();
+					System.out.println("enter courseID");
+					c.setCourseID(sc.nextInt());
+					System.out.println("enter Name");
+					c.setName(sc.next());
+					System.out.println("enter Desription");
+					c.setDescription(sc.next());
+					System.out.println("SchoolYear");
+					c.setSchoolYear(sc.nextInt());
+					cs.insertCourses(c);
+				break;
+				case 8:
+					Instructor i=new Instructor();
+					System.out.println("enter InstructorID");
+					i.setInstructorID(sc.nextInt());
+					System.out.println("enter FirstName");
+					i.setFirstName(sc.next());
+					System.out.println("enter LastName");
+					i.setLastName(sc.next());
+					System.out.println("enter Gender");
+					i.setGender(sc.next());
+					System.out.println("enter Age");
+					i.setAge(sc.nextInt());
+					System.out.println("enter ContactAddress");
+					i.setContactAddress(sc.nextLong());
+					System.out.println("enter Email");
+					i.setEmail(sc.next());
+					System.out.println("enter Password");
+					i.setPassword(sc.next());
+					is.insertInstructor(i);
+				break;
+					
+				case 9:
+					Schedules s=new Schedules();
+					System.out.println("enter SchedulesID");
+					s.setScheduleID(sc.nextInt());					
+					System.out.println("enter Dayofschedule Date");
+					s.setDayofschedule(sc.next());
+					System.out.println("enter StartingTime Time");
+					s.setStartingTime(sc.next());
+					System.out.println("enter TimeEnded Time");
+					s.setTimeEnded(sc.next());
+					
+					Student std=new Student();
+					std.setStudentID(sc.nextInt());
+					s.setStudent(std);
+					
+					Instructor ins=new Instructor();
+					ins.setInstructorID(sc.nextInt());
+					s.setInstructor(ins);
+					
+					Courses co=new Courses();
+					co.setCourseID(sc.nextInt());
+					s.setCourses(co);
+					
+					Subjects s2=new Subjects();
+					s2.setSubjectID(sc.nextInt());
+					s.setSubjects(s2);
+					ss.insertSchedules(s);
+					break;
+					
+				case 10:
+					Student S1=new Student();
+					System.out.println("enter StudentID");
+				    S1.setStudentID(sc.nextInt());
+					System.out.println("enter FirstName");
+					S1.setFirstName(sc.next());
+					System.out.println("enter LastName");
+					S1.setLastName(sc.next());
+					System.out.println("enter Gender");
+					S1.setGender(sc.next());
+					System.out.println("enter Age");
+				    S1.setAge(sc.nextInt());
+				    System.out.println("enter ContactAddress");
+				    S1.setContactAddress(sc.nextLong());
+				    System.out.println("enter Email");
+					S1.setEmail(sc.next());
+					System.out.println("enter Password");
+					S1.setPassword(sc.next());
+					ss1.insertStudent(S1);
+					break;
+					
+					case 11:
+						Subjects S2=new Subjects();
+						System.out.println("enter SubjectID");
+					    S2.setSubjectID(sc.nextInt());
+						System.out.println("enter Name");
+						S2.setName(sc.next());
+						
+						
+						Courses course1=new Courses();
+						course1.setCourseID(sc.nextInt());
+						S2.setCourse(course1);
+						ss2.insertSubjects(S2);
+						break;
+						
+					case 12:
+					Transaction1 t1=new Transaction1();
+					System.out.println("enter TransactionID");
+					t1.setTransactionID(sc.nextInt());
+					System.out.println("enter TransactionAmount");
+				    t1.setTransactionAmount(sc.nextInt());
+					
+					
+					Student student1=new Student();
+					student1.setStudentID(sc.nextInt());
+					
+					t1.setStd(student1);
+					ts.insertTransaction1(t1);
+					break;
+					
+				case 13:
+					Courses c2=new Courses();
+					System.out.println("enter courseID");
+					c2.setCourseID(sc.nextInt());
+					System.out.println("enter Name");
+					c2.setName(sc.next());
+					System.out.println("enter Desription");
+					c2.setDescription(sc.next());
+					System.out.println("SchoolYear");
+					c2.setSchoolYear(sc.nextInt());
+					cs.updateCourses(c2);
+					break;
+					
+				case 14:
+					Instructor i1=new Instructor();
+					System.out.println("enter InstructorID");
+					i1.setInstructorID(sc.nextInt());
+					System.out.println("enter FirstName");
+					i1.setFirstName(sc.next());
+					System.out.println("enter LastName");
+					i1.setLastName(sc.next());
+					System.out.println("enter Gender");
+					i1.setGender(sc.next());
+					System.out.println("enter Age");
+					i1.setAge(sc.nextInt());
+					System.out.println("enter ContactAddress");
+					i1.setContactAddress(sc.nextLong());
+					System.out.println("enter Email");
+					i1.setEmail(sc.next());
+					System.out.println("enter Password");
+					i1.setPassword(sc.next());
+					is.insertInstructor(i1);
+					
+					break;
+					
+				case 15:
+					Schedules S=new Schedules();
+					System.out.println("enter SchedulesID");
+					S.setScheduleID(sc.nextInt());					
+					System.out.println("enter Dayofschedule Date");
+					S.setDayofschedule(sc.next());
+					System.out.println("enter StartingTime Time");
+					S.setStartingTime(sc.next());
+					System.out.println("enter TimeEnded Time");
+					S.setTimeEnded(sc.next());
+				
+					Student Std=new Student();
+					System.out.println("enter student id");
+					Std.setStudentID(sc.nextInt());
+					S.setStudent(Std);
+					Instructor Ins=new Instructor();
+					System.out.println("enter instructor id");
+					Ins.setInstructorID(sc.nextInt());
+					S.setInstructor(Ins);
+					
+					Courses Co=new Courses();
+					System.out.println("enter course id");
+					Co.setCourseID(sc.nextInt());
+					S.setCourses(Co);
+					
+					Subjects Ss2=new Subjects();
+					System.out.println("enter subject id");
+					Ss2.setSubjectID(sc.nextInt());
+					S.setSubjects(Ss2);
+					ss.updateSchedules(S);
+					break;
+					
+				case 16:
+					Student SS1=new Student();
+					System.out.println("enter StudentID");
+				    SS1.setStudentID(sc.nextInt());
+					System.out.println("enter FirstName");
+					SS1.setFirstName(sc.next());
+					System.out.println("enter LastName");
+					SS1.setLastName(sc.next());
+					System.out.println("enter Gender");
+					SS1.setGender(sc.next());
+					System.out.println("enter Age");
+				    SS1.setAge(sc.nextInt());
+				    System.out.println("enter ContactAddress");
+				    SS1.setContactAddress(sc.nextLong());
+				    System.out.println("enter Email");
+					SS1.setEmail(sc.next());
+					System.out.println("enter Password");
+					SS1.setPassword(sc.next());
+					ss1.updateStudent(SS1);
+					break;
+					
+				case 17:
+					Subjects Sub1=new Subjects();
+					System.out.println("enter SubjectID");
+				    Sub1.setSubjectID(sc.nextInt());
+					System.out.println("enter Name");
+					Sub1.setName(sc.next());
+					
+					
+					Courses courses1=new Courses();
+					courses1.setCourseID(sc.nextInt());
+					Sub1.setCourse(courses1);
+					ss2.updateSubjects(Sub1);
+					break;
+				
+					
+				case 18:
+					Transaction1 T1=new Transaction1();
+					System.out.println("enter TransactionID");
+					T1.setTransactionID(sc.nextInt());
+					System.out.println("enter TransactionAmount");
+				    T1.setTransactionAmount(sc.nextInt());
+					
+					
+					Student Student1=new Student();
+					Student1.setStudentID(sc.nextInt());
+					
+					T1.setStd(Student1);
+					ts.updateTransaction1(T1);
+				
+				case 19:
+					Courses c3=new Courses();
+					System.out.println("enter CourseID");
+					c3.setCourseID(sc.nextInt());
+					cs.deleteCourses(c3);
+					break;
+				case 20:
+					Instructor i3=new Instructor();
+					System.out.println("enter instructorID");
+					i3.setInstructorID(sc.nextInt());
+					is.deleteInstructor(i3);	
+					break;
+				case 21:
+					Schedules s3=new Schedules();
+					System.out.println("enter SchedulesID");
+					s3.setScheduleID(sc.nextInt());
+					ss.deleteSchedules(s3);
+					break;
+				case 22:
+					Student s1=new Student();
+					System.out.println("enter StudentID");
+				    s1.setStudentID(sc.nextInt());
+					ss1.deleteStudent(s1);
+					break;
+				case 23:
+					Subjects sub=new Subjects();
+					System.out.println("enter SubjectID");
+					sub.setSubjectID(sc.nextInt());
+					sub.deleteSubjects(sub);
+					break;
+				case 24:
+					Transaction1 t3=new Transaction1();
+					System.out.println("enter TransactionID");
+					t3.setTransactionID(sc.nextInt());
+					ts.deleteTransaction1(t3);
+					break;
+				case 25:
+					cs.displayCourses();
+					break;
+				case 26:
+					is.displayInstructor();	
+					break;
+				case 27:
+					ss.displaySchedules();
+					break;
+				case 28:
+					ss1.displayStudent();
+					break;
+				case 29:
+					ss2.displaySubjects();
+					break;
+				case 30:
+					ts.displayTransaction1();
+					break;
+							
+				default:
+					System.out.println("invalid choice");
+					break;
+					
+		      }
+		      System.out.println("1.get courses details");
+			    System.out.println("2.get instructor details");
+			    System.out.println("3.get schedules details");
+			    System.out.println("4.get student details");
+			    System.out.println("5.get subjects details");
+			    System.out.println("6.get transaction1 details");
+			    System.out.println("7.insert courses details");
+			    System.out.println("8.insert instructor details");
+			    System.out.println("9.insert schedules details");
+			    System.out.println("10.insert student details");
+			    System.out.println("11.insert subjects details");
+			    System.out.println("12.insert transaction1 details");
+			    System.out.println("13.update courses details");
+			    System.out.println("14.update instructor details");
+			    System.out.println("15.update schedules details");
+			    System.out.println("16.update student details");
+			    System.out.println("17.update subjects details");
+			    System.out.println("18.update transaction1 details");
+			    System.out.println("19.delete courses details");
+			    System.out.println("20.delete instructor details");
+			    System.out.println("21.delete schedules details");
+			    System.out.println("22.delete student details");
+			    System.out.println("23.delete subjects details");
+			    System.out.println("24.delete transaction1 details");
+			    System.out.println("25.display courses details");
+			    System.out.println("26.display instructor details");
+			    System.out.println("27.display schedules details");
+			    System.out.println("28.display student details");
+			    System.out.println("29.display subjects details");
+			    System.out.println("30.display transaction1 details");
+			    System.out.println("Enter Choice");
+			    System.out.println("press 0 to exit");
+			    a=sc.nextInt();
+
+		    }
+		 	
+		
+	    }
+}
+}
+//ServiceImplTest:
+package com.service.test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+
+import com.schoolmanagement.serviceImpl.CoursesServiceImpl;
+import com.schoolmanagement.serviceImpl.InstructorServiceImpl;
+import com.schoolmanagement.serviceImpl.SchedulesServiceImpl;
+import com.schoolmanagement.serviceImpl.StudentServiceImpl;
+import com.schoolmanagement.serviceImpl.SubjectsServiceImpl;
+import com.schoolmanagement.serviceImpl.Transaction1ServiceImpl;
+
+public class ServiceImplTest 
+{   
+	CoursesServiceImpl ssimp1=new CoursesServiceImpl();
+    InstructorServiceImpl ssimp2=new InstructorServiceImpl();
+    SchedulesServiceImpl ssimp3=new SchedulesServiceImpl();
+    StudentServiceImpl ssimp4=new StudentServiceImpl();
+    SubjectsServiceImpl ssimp5=new SubjectsServiceImpl();
+    Transaction1ServiceImpl ssimp6=new Transaction1ServiceImpl();
+   
+//
+@Test
+public void displayCourses()
+{
+	int C=ssimp1.displayCourses();
+	assertEquals(1,C);
+	
+}
+
+//
+//@Test
+//public void displayInstructor()
+//{
+//	int I
+//	=ssimp2.displayInstructor();
+//	assertEquals(1,I);
+//}
+////
+//@Test
+//public void displaySchedules()
+//{
+//	int S
+//	=ssimp3.displaySchedules();
+//	assertEquals(1,S);	
+//}
+//
+//@Test
+//public void displayStudent()
+//{
+//	int S1
+//	=ssimp4.displayStudent();
+//	assertEquals(1,S1);	
+//}
+////
+//@Test
+//public void displaySubjects()
+//{
+//	int S2
+//	=ssimp5.displaySubjects();
+//	assertEquals(1,S2);
+//	
+//}
+////
+//@Test
+//public void displayTransaction1()
+//{
+//	int T
+//	=ssimp6.displayTransaction1();
+//	assertEquals(1,T);
+//		
+//}
+
+}
+  
+
+	
+
+
+
+
+
+
